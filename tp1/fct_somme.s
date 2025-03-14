@@ -8,7 +8,7 @@ uint32_t somme(void)
     }
     return res;
 }
-*/
+*/ #test
     .text
     .globl somme
 /* DEBUT DU CONTEXTE
