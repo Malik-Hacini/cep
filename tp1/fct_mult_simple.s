@@ -16,16 +16,36 @@ uint32_t mult_simple(void)
     .globl mult_simple
 /* DEBUT DU CONTEXTE
 Fonction :
-    nom_de_fonction : feuille ou non feuille
+    mult_simple : feuille
 Contexte :
-    À compléter
+    x : mémoire #allouée par mult_simple.c
+    y : mémoire #allouée par mult_simple.c
+    res : registre t0
 FIN DU CONTEXTE */
 mult_simple:
 mult_simple_fin_prologue:
-/* A compléter */
+    /* res = 0; */
+    li t0, 0
+
+boucle_mult:
+    /* while (y != 0) { */
+    la t1, y
+    lw t2, 0(t1)
+    beqz t2, fin_boucle_mult
+
+    /* res = res + x; */
+    la t3, x
+    lw t4, 0(t3)
+    add t0, t0, t4
+
+    /* y--; */
+    addi t2, t2, -1
+    sw t2, 0(t1)
+
+    j boucle_mult
+fin_boucle_mult:
+    /* return res; */
+    mv a0, t0
+
 mult_simple_debut_epilogue:
     ret
-
-
-    .data
-/* uint32_t res; */

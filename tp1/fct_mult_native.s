@@ -10,12 +10,19 @@ uint32_t mult_native(void)
     .globl mult_native
 /* DEBUT DU CONTEXTE
 Fonction :
-    nom_de_fonction : feuille ou non feuille
+    mult_native : feuille
 Contexte :
-    À compléter
+    x : mémoire #allouée dans mult_native.c
+    y : mémoire #allouée dans mult_native.c
 FIN DU CONTEXTE */
 mult_native:
 mult_native_fin_prologue:
-/* A compléter */
+    /* return x * y; */
+    la t0, x
+    lw a0, 0(t0)
+    la t1, y
+    lw t1, 0(t1)
+    mul a0, a0, t1
+
 mult_native_debut_epilogue:
     ret

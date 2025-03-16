@@ -28,15 +28,15 @@ somme_fin_prologue:
 
 /*for (i = 1; i <= 10; i++) {*/
     li t0, 1
-for:
-    li   t2, 10          
+    li   t2, 10 
+for:    
     bgt  t0, t2, fin
     /* res = res + i; */
     add t1, t0, t1
     /* i++ */
     addi t0, t0, 1
-fin_for:
     j for
+    /* } */
 /* return res; */
 fin:
     mv a0, t1
