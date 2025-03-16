@@ -18,9 +18,9 @@ uint32_t mult_simple(void)
 Fonction :
     mult_simple : feuille
 Contexte :
+    res : registre t0
     x : mémoire #allouée par mult_simple.c
     y : mémoire #allouée par mult_simple.c
-    res : registre t0
 FIN DU CONTEXTE */
 mult_simple:
 mult_simple_fin_prologue:
