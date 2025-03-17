@@ -18,14 +18,16 @@ uint32_t mult_simple(void)
 Fonction :
     mult_simple : feuille
 Contexte :
-    res : registre t0
+    res : mémoire #section .data
     x : mémoire #allouée par mult_simple.c
     y : mémoire #allouée par mult_simple.c
 FIN DU CONTEXTE */
 mult_simple:
 mult_simple_fin_prologue:
     /* res = 0; */
-    li t0, 0
+    la t0, res
+    li t1, 0
+    sw t1, 0(t0)
 
 boucle_mult:
     /* while (y != 0) { */
@@ -36,7 +38,10 @@ boucle_mult:
     /* res = res + x; */
     la t3, x
     lw t4, 0(t3)
-    add t0, t0, t4
+    la t0, res
+    lw t5, 0(t0)
+    add t5, t5, t4
+    sw t5, 0(t0)
 
     /* y--; */
     addi t2, t2, -1
@@ -45,7 +50,12 @@ boucle_mult:
     j boucle_mult
 fin_boucle_mult:
     /* return res; */
-    mv a0, t0
+    la t0, res
+    lw a0, 0(t0)
 
 mult_simple_debut_epilogue:
     ret
+
+    .data
+    .globl res
+res: .word 0
