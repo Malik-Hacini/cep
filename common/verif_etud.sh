@@ -23,6 +23,9 @@ done
 COMMON=$(cd $(dirname $0); pwd)
 make -s -C ${COMMON}/parser/
 
+# Supprime les résultats des compilations précédentes
+make clean
+
 exosok=""
 for exo in $exos
 do
@@ -69,7 +72,7 @@ do
       echo -e "${RED}Revoir fct_${exo}.s${NC}\n"
       exit 1
     fi
-    echo "Exécution de $exo sans erreur"
+    echo "Exécution de $exo sans erreur."
     # Comparaison de la sortie avec le répertoire tests/
     if cmp --silent $exo.sortie test/$exo.sortie
     then
