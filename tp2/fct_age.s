@@ -2,7 +2,7 @@
 uint32_t age(uint32_t annee_naissance)
 {
     uint32_t age;
-    age = 2022 - annee_naissance;
+    age = 2000 - annee_naissance;
     return age;
 }
 */
@@ -11,20 +11,29 @@ uint32_t age(uint32_t annee_naissance)
     .globl age
     /* uint32_t age(uint32_t annee_naissance) */
 /* DEBUT DU CONTEXTE
-  Fonction :
+Fonction :
     age : feuille
-  Contexte imposé :
+Contexte : # contexte imposé
     annee_naissance  : registre a0
-    uint32_t age     : pile *(sp+0)
-*/
+    age              : pile *(sp+0)  # de type uint32_t
+FIN DU CONTEXTE */
 age:
-/* A compléter */
-  addi sp, sp, -4
+    /* Prologue: reserve space for the local variable 'age' */
+    addi sp, sp, -4
 age_fin_prologue:
-  li t0, 2022
-  sub t0, t0, a0
-  sw t0, 0(sp)
-  mv a0, t0
+    /* uint32_t age; */
+    
+    /* age = 2000 - annee_naissance; */
+    li t0, 2000
+    sub t0, t0, a0
+    
+    /* Store age on the stack as required by the context */
+    sw t0, 0(sp)
+    
+    /* return age; */
+    lw a0, 0(sp)
+    
 age_debut_epilogue:
-  addi sp, sp, 4
+    /* Epilogue: free stack space */
+    addi sp, sp, 4
     ret
