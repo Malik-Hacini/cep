@@ -7,7 +7,7 @@ struct cellule_t {
    struct cellule_t *suiv;
 };
 
-extern struct cellule_t *decoupe_liste(struct cellule_t *l, struct cellule_t **l1, struct cellule_t **l2);
+struct cellule_t *decoupe_liste(struct cellule_t *l, struct cellule_t **l1, struct cellule_t **l2);
 
 static struct cellule_t *cree_liste(int32_t tab[])
 {

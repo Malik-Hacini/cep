@@ -7,9 +7,9 @@
 #define STR_M(s) #s
 #define STR(s) STR_M(s)
 
-extern void tri_min(int32_t tab[], uint32_t taille);
+void tri_min(int32_t tab[], uint32_t taille);
 
-static void afficher_tab(int32_t tab[], uint32_t taille)
+void afficher_tab(int32_t tab[], uint32_t taille)
 {
    for (uint32_t i = 0; i < taille; i++) {
       printf("%" PRId32 " ", tab[i]);
@@ -24,12 +24,13 @@ int comp(const void *a, const void *b)
 
 int main(void)
 {
-   uint32_t taille = 23;
-   printf("Taille du tableau voulue: %" PRIu32 "\n", taille);
-   if (taille > TAILLE_MAX) {
-      printf("Erreur, la taille du tableau doit être inférieure à " STR(TAILLE_MAX) " !\n");
-      exit(1);
-   }
+   uint32_t taille;
+   char tampon[16];
+   do {
+      printf("Entrez la taille du tableau voulue (<= " STR(TAILLE_MAX) ")\n");
+      fgets(tampon, 16, stdin);
+      taille = strtoul(tampon, NULL, 0);
+   } while (taille > TAILLE_MAX);
 
    int32_t *tab = (int32_t *)malloc(taille * sizeof(int32_t));
    if (tab == NULL) {

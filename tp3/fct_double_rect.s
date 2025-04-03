@@ -8,10 +8,10 @@ struct rect_t double_rect(struct rect_t r)
     .globl double_rect
 /*
     Fonction feuille : rien à faire sur la pile, ra non modifié
-    Agrégat de taille > 64 bits en valeur de retour
+    Agrégat > 64 en valeur de retour
       => appelante a réservé une place dans sa pile
          et a0 (paramètre implicite) pointe dessus
-    Agrégat de taille > 64 bits en paramètre
+    Agrégat > 64 en paramètre
       => appelante a réservé une place dans sa pile
          et a1 (et non a0 car réservé pour la valeur de retour) pointe dessus
 
@@ -21,7 +21,7 @@ DEBUT DU CONTEXTE
   Contexte :
     r         : pile *(a1)
     résultat  : pile *(a0)
-FIN DU CONTEXTE */
+*/
 double_rect:
 double_rect_fin_prologue:
     lhu  t0, 10(a1)

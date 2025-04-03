@@ -7,7 +7,7 @@ struct cellule_t {
    struct cellule_t *suiv;
 };
 
-extern void inverse_liste(struct cellule_t **l);
+void inverse_liste(struct cellule_t **l);
 
 static struct cellule_t *cree_liste(int32_t tab[])
 {

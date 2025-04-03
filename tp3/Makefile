@@ -1,11 +1,37 @@
-BADGES_TARGET = niv1__taille_chaine niv1__inverse_chaine niv1__tri_min niv2__inverse_liste niv2__decoupe_liste niv3__palin
-BINS = struct double_rect
-CONTEXTS := ${BINS:=.ctxt}
+BINS = taille_chaine inverse_chaine tri_min inverse_liste decoupe_liste palin
+BINS += struct double_rect
+
+RVDIR ?= /matieres/3MMCEP/riscv
+AS = $(RVDIR)/bin/riscv32-unknown-elf-gcc
+ASFLAGS = -g -c
+CC = $(AS)
+CFLAGS = -nostdinc -Wall -Wextra -g -std=c99 -mabi=ilp32 -mcmodel=medany -ffunction-sections -fdata-sections -g
+CFLAGS += -I$(RVDIR)/include
+LD = $(AS)
+LDFLAGS = -L$(RVDIR)/lib -L$(RVDIR)/lib/cep_riscv_no_it
+LDFLAGS += -T cep.ld -nostartfiles -nostdlib -static -Wl,--nmagic -Wl,--gc-sections
+
+.PHONY: all
+all: $(BINS)
 
 
-COMMON := ../common
-include $(COMMON)/rules.mk
+%.o: %.S
+	$(AS) $(ASFLAGS) -o $@ $<
 
+%.o: %.s
+	$(AS) $(ASFLAGS) -o $@ $<
+
+%.stxetd: fct_%.s
+	fonction=$$(basename $@ .stxetd);awk -f test/syntaxe_etd.awk -v fonction=$$fonction $< > $@;cat $@
+
+STXETDOUTS = $(foreach f, $(BINS),  $(addsuffix .stxetd, $f))
+SORTIES = $(foreach f, $(BINS), $(addsuffix .sortie, $f))
+OBJS = $(foreach f, $(BINS), $(addsuffix .o, $f)) \
+	$(foreach f, $(BINS), $(addprefix fct_, $(addsuffix .o, $f)))
+
+.PHONY: clean
+clean:
+	$(RM) $(BINS) $(OBJS) $(TMPOBJS) $(STXETDOUTS) $(SORTIES)
 
 inverse_liste: inverse_liste.o fct_inverse_liste.o
 

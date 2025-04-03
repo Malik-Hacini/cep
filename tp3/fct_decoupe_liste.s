@@ -34,15 +34,18 @@ DEBUT DU CONTEXTE
 Fonction :
   decoupe_liste : feuille
 Contexte :
-  l             : registre a0    # paramètre de type (struct cellule_t *)
-  l1            : registre a1    # paramètre de type (struct cellule_t **)
-  l2            : registre a2    # paramètre de type (struct cellule_t **)
-  fictif2.suiv  : pile *(sp+12)  # champ de type (cellule_t *)
-  fictif2.val   : pile *(sp+8)   # champ de type (int32_t)
-  fictif1.suiv  : pile *(sp+4)   # champ de type (cellule_t *)
-  fictif1.val   : pile *(sp+0)   # champ de type (int32_t)
-FIN DU CONTEXTE */
+  l             : registre a0, paramètre de type (struct cellule_t *)
+  l1            : registre a1, paramètre de type (struct cellule_t **)
+  l2            : registre a2, paramètre de type (struct cellule_t **)
+  fictif2.suiv  : pile à sp+12 (champ de type cellule_t *)
+  fictif2.val   : pile à sp+8  (champ de type int32_t)
+  fictif1.suiv  : pile à sp+4  (champ de type cellule_t *)
+  fictif1.val   : pile à sp+0  (champ de type int32_t)
+*/
 decoupe_liste:
+    addi sp, sp, -16
 decoupe_liste_fin_prologue:
+    lw 0(a1)
 decoupe_liste_debut_epilogue:
+    addi sp, sp, 16
     ret

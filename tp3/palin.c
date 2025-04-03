@@ -2,7 +2,7 @@
 #include <inttypes.h>
 #include <stdbool.h>
 
-extern bool palin(const char *);
+bool palin(const char *);
 
 static void test(const char *ch)
 {

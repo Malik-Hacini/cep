@@ -5,7 +5,7 @@
 
 extern void inverse_chaine(char *, uint32_t);
 
-static uint32_t taille_chaine(const char *chaine)
+uint32_t taille_chaine(const char *chaine)
 {
     uint32_t taille=0;
     while (chaine[taille] != '\0'){

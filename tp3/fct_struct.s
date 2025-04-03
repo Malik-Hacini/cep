@@ -18,10 +18,10 @@ DEBUT DU CONTEXTE
   Fonction :
     affichage : non feuille
   Contexte :
-    s.entier  : registre a0 ; pile *(sp+0)  # champ de type (int32_t)
-    s.ptr     : registre a1 ; pile *(sp+4)  # champ de type (char *)
+    s.entier  : registre a0 ; pile *(sp+0)  (champ de type int32_t)
+    s.ptr     : registre a1 ; pile *(sp+4)  (champ de type char *)
     ra        : pile *(sp+8)
-FIN DU CONTEXTE */
+*/
 affichage:
     addi sp, sp, -12
     sw   ra, 8(sp)
@@ -49,13 +49,13 @@ void modification(int32_t entier, char *p, struct structure_t *ps)
 */
     .globl modification
 /* void modification(int32_t e, char *p, struct structure_t *ps) */
-/*
+/* DEBUT DU CONTEXTE
   Fonction :
-    modification : feuille  # sans variables locales
+    modification : feuille (sans variables locales)
   Contexte :
-    e   : registre a0  # argument de type (int32_t)
-    p   : registre a1  # argument de type (char *)
-    ps  : registre a2  # argument de type (struct structure_t *)
+    e   : registre a0, argument de type (int32_t)
+    p   : registre a1, argument de type (char *)
+    ps  : registre a2, argument de type (struct structure_t *)
 */
 modification:
 modification_fin_prologue:
