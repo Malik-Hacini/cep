@@ -22,11 +22,11 @@ uint32_t mult(uint32_t x, uint32_t y);
 DEBUT DU CONTEXTE
   Fonction :
     mult : feuille
-  Contexte :   # contexte imposé
+  Contexte imposé :
     x    : registre a0
     y    : registre a1
     res  : pile *(sp+0)
-FIN DU CONTEXTE */
+*/
 
 mult:
     /* on reserve la place nécessaire dans la pile */
@@ -51,4 +51,4 @@ fin_while:
 mult_debut_epilogue:
     addi sp, sp, 4 /* on libère la pile */
     ret
-/* On peut remarquer que le contexte imposé ici utilise la pile pour la variable locale alors que la fonction est une fonction feuille. Par la suite, on placera les variables locales en pile que si la fonction est non-feuille (contient un appel à une sous-fonction) ou si le contexte donné l'impose. */
+/* On peut remarquer que le contexte imposé ici utilise la pile pour la variable locale alors que la fonction est une fonction feuille. Par la suite, on placera les variables locales en pile que si la fonction est non-feuille (contient un appel d'un sous-fonction) ou si le contexte donné l'impose. */

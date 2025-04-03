@@ -17,11 +17,12 @@ uint32_t pgcd(uint32_t a, uint32_t b)
     /* uint32_t pgcd(uint32_t a, uint32_t b) */
 /* DEBUT DU CONTEXTE
   Fonction :
-    pgcd : feuille   # => pas besoin de réserver d'espace dans la pile
+    pgcd : feuille
+    => pas besoin de réserver d'espace dans la pile
   Contexte :
     a  : registre a0
     b  : registre a1
-FIN DU CONTEXTE */
+*/
 pgcd:
 pgcd_fin_prologue:
     /* while (a != b) {  */

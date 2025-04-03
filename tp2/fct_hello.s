@@ -1,7 +1,7 @@
 /*
 void hello(void)
 {
-    affiche_HelloWorld();
+	affiche_HelloWorld();
 }
 */
 
@@ -17,16 +17,14 @@ DEBUT DU CONTEXTE
     hello : non feuille
   Contexte :
     ra  : pile *(sp+0)
-FIN DU CONTEXTE */
+*/
 hello:
-    /* Prologue: save return address */
-    addi sp, sp, -4
-    sw ra, 0(sp)
+/* A compléter */
+  addi sp, sp, -4
+  sw ra, 0(sp)
 hello_fin_prologue:
-    /* affiche_HelloWorld(); */
-    call affiche_HelloWorld
+  jal affiche_HelloWorld
 hello_debut_epilogue:
-    /* Epilogue: restore return address */
-    lw ra, 0(sp)
-    addi sp, sp, 4
-    ret
+  lw ra, 0(sp)
+  addi sp, sp, 4
+  ret

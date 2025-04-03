@@ -13,44 +13,28 @@ uint32_t fact(uint32_t n)
     .globl fact
     /* uint32_t fact(uint32_t n) */
 /* DEBUT DU CONTEXTE
-Fonction :
-    fact : non feuille
-Contexte :
-    ra : pile *(sp+0)
-    n : registre a0; pile *(sp+4)
-FIN DU CONTEXTE */
+fonction :
+     fact  : non feuille
+contexte :
+     n      : registre a0; pile *(sp+0)
+     ra     : pile *(sp+4)
+ */
 fact:
-    /* Prologue: save return address and n */
+/* A compléter */
     addi sp, sp, -8
-    sw ra, 0(sp)
-    sw a0, 4(sp)  /* Save n as we'll need it after recursive call */
+    sw ra, 4(sp)
+    sw a0, 0(sp)
 fact_fin_prologue:
-    /* if (n <= 1) { */
     li t0, 1
-    bgt a0, t0, else_branch
-    
-    /* return 1; */
-    li a0, 1
+    ble a0, t0, else
+    sub a0, a0, t0
+    jal fact
+    lw a1, 0(sp)
+    mul a0, a0, a1
     j fact_debut_epilogue
-    
-else_branch:
-    /* Calculate n-1 */
-    addi a0, a0, -1
-    
-    /* Recursive call: fact(n-1) */
-    call fact
-    
-    /* Now a0 contains fact(n-1), restore n */
-    lw a1, 4(sp)
-    
-    /* Call mult to calculate n * fact(n-1) */
-    /* a0 already contains fact(n-1) */
-    /* a1 already contains n */
-    call mult
-    /* Result is now in a0 */
-    
+else:
+    mv a0, t0
 fact_debut_epilogue:
-    /* Epilogue: restore return address */
-    lw ra, 0(sp)
+    lw ra, 4(sp)
     addi sp, sp, 8
     ret

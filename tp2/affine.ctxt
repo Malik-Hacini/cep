@@ -1,0 +1,7 @@
+Fonction :
+    affine : non feuille
+Contexte :)
+    a : registre a0; pile *(sp+4)
+    b : registre a1; pile *(sp+8)
+    x : registre a2; pile *(sp+12)
+    ra : pile *(sp+0)

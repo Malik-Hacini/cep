@@ -4,7 +4,7 @@ uint32_t fact_papl(uint32_t n)
     if (n <= 1) {
         return 1;
     } else {
-        uint64_t tmp = (uint64_t)n*fact_papl(n-1);
+        uint64_t tmp = n*fact_papl(n-1);
         if ((tmp >> 32) > 0)
             erreur_fact(n);
         return (uint32_t)tmp;
@@ -16,13 +16,38 @@ uint32_t fact_papl(uint32_t n)
     .globl fact_papl
     /* uint32_t fact_papl(uint32_t n) */
 /* DEBUT DU CONTEXTE
-Fonction :
-    nom_de_fonction : feuille ou non feuille
-Contexte :
-    À compléter
-FIN DU CONTEXTE */
+fonction :
+     fact_papl  : non feuille
+contexte :
+     n      : registre a0; pile *(sp+4)
+     tmp      : registre t0/t1
+     ra               : pile *(sp+0)
+ */
 fact_papl:
-/* A compléter */
+    addi sp, sp, -8
+    sw ra, 4(sp)
+    sw a0, 0(sp)
 fact_papl_fin_prologue:
+    addi t2, zero, 1
+    bgt a0, t2, else
+    addi a0, zero, 1
+    j fact_papl_debut_epilogue
+
+else:
+    addi a0, a0, -1
+    jal fact_papl
+    lw t2, 0(sp)
+    mul t0, t2, a0
+    mulh t1, t2, a0
+    bgt t1, zero, if
+    mv a0, t0
+    j fact_papl_debut_epilogue
+
+if:
+    mv a0, t2
+    jal erreur_fact
+
 fact_papl_debut_epilogue:
+    lw ra, 4(sp)
+    addi sp, sp, 8
     ret

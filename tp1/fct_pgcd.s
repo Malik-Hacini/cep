@@ -44,7 +44,7 @@ while:
     beq  t0, t1, fin /* Saut à fin si i == j */
     /* if (i < j) {  */
     sltu t2, t0, t1 /* Le registre t2 est utilisé pour stocker le résultat du test i < j */
-    beqz t2, else /* pseudo-instruction, on aurait pu utiliser beq t2, zero, else */
+    beqz t2, else  /* pseudo-instruction, on aurait pu utiliser beq t2, zero, else */
     /* j = j - i;  */
     sub  t1, t1, t0
     j    fin_if

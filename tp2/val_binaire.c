@@ -6,14 +6,26 @@
 /* Ce code n'est *pas* un exemple à suivre, il ne sert qu'à illuster
    le passage de plus de 8 paramètres à une fonction ! */
 
-extern uint16_t val_binaire(uint8_t, uint8_t, uint8_t, uint8_t,
-                            uint8_t, uint8_t, uint8_t, uint8_t,
-                            uint8_t, uint8_t, uint8_t, uint8_t,
-                            uint8_t, uint8_t, uint8_t, uint8_t);
+uint16_t val_binaire(uint8_t, uint8_t, uint8_t, uint8_t,
+                    uint8_t, uint8_t, uint8_t, uint8_t,
+                    uint8_t, uint8_t, uint8_t, uint8_t,
+                    uint8_t, uint8_t, uint8_t, uint8_t);
 
-static char titi[17];
+uint8_t chiffre(char c)
+{
+   if (c == '0') {
+      return 0;
+   } else if (c == '1') {
+      return 1;
+   } else {
+      printf("Erreur : %c n'est pas un chiffre binaire\n", c);
+      exit(1);
+   }
+}
 
-static void stringify(uint8_t s[16])
+char titi[17];
+
+void stringify(uint8_t s[16])
 {
    for (int i = 0; i < 16; i++)
       titi[i] = '0' + s[i];
@@ -28,6 +40,6 @@ int main(void)
                               toto[8],  toto[9],  toto[10], toto[11],
                               toto[12], toto[13], toto[14], toto[15]);
    stringify(toto);
-   printf("Valeur du nombre binaire %s = 0x%" PRIx16 "\n", titi, val);
+   printf("Valeur du nombre binaire %s = %" PRIx16 "\n", titi, val);
    return 0;
 }

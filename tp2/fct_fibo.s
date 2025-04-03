@@ -36,7 +36,7 @@ DEBUT DU CONTEXTE
     ra         : pile *(sp+8)
     n          : registre a0; pile *(sp+4)
     fibo_temp  : pile *(sp+0)
-FIN DU CONTEXTE */
+*/
 
 fibo:
     /* on reserve la place nécessaire dans la pile */
@@ -65,7 +65,7 @@ else:
     /* stocke la valeur retournée dans fibo_temp */
     sw   a0, 0(sp)
 
-    /* restauration du parametre n initial (a0 pu être modifié dans la fonction appelée) */
+    /* restauration du parametre n initial (a0 pu être modifié dans la fonction appelée)*/
     lw   a0, 4(sp)
     /* on appelle maintenant fibo(n - 2) */
     addi a0, a0, -2
