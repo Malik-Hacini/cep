@@ -18,10 +18,10 @@ bool palin(const char *ch)
 fonction :
      palin  : non feuille
 contexte :
-     ch      : registre a0; pile *(sp+4)
+     ch  : registre a0; pile *(sp+4)
      inf : registre t0
      sup : registre t1
-     ra               : pile *(sp+0)
+     ra  : pile *(sp+0)
  */
 palin:
     addi sp, sp, -8
