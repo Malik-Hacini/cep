@@ -11,10 +11,9 @@
 int32_t tab[TAILLE];
 int32_t ref[TAILLE];
 
-/* Les 3 tris à comparer */
-extern void tri_nain(int32_t[], uint32_t);
-extern void tri_nain_opt(int32_t[], uint32_t);
-extern void tri_nain_superopt(int32_t[], uint32_t);
+void tri_nain(int32_t[], uint32_t);
+void tri_nain_opt(int32_t[], uint32_t);
+void tri_nain_superopt(int32_t[], uint32_t);
 
 static void init_tabs(int32_t tab[], int32_t ref[], uint32_t taille)
 {

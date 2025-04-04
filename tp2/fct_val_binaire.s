@@ -19,7 +19,7 @@ uint8_t val_binaire(uint8_t b15, uint8_t b14, uint8_t b13, uint8_t b12,
                     uint8_t b3, uint8_t b2, uint8_t b1, uint8_t b0); */
 /* DEBUT DU CONTEXTE
 fonction :
-     nom_de_fonction  : feuille ou non feuille
+     nom_de_fonction  : feuille 
 contexte :
      b15      : registre a0
      b14      : registre a1

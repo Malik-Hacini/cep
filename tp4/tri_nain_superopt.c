@@ -11,7 +11,7 @@
 int32_t tab[TAILLE];
 int32_t ref[TAILLE];
 
-extern void tri_nain_superopt(int32_t[], uint32_t);
+void tri_nain_superopt(int32_t[], uint32_t);
 
 static void afficher_tab(int32_t tab[], uint32_t taille)
 {
@@ -34,9 +34,18 @@ int comp(const void *a, const void *b)
    return (int)(*(int32_t *)a - *(int32_t *)b);
 }
 
+static uint32_t acq()
+{
+   char tampon[16];
+   printf("Fonction tri_nain_superopt : Entrez la taille du tableau (max = " STR(TAILLE) ")\n");
+   fgets(tampon, 16, stdin);
+   return strtoul(tampon, NULL, 0);
+}
+
+
 int main(void)
 {
-   uint32_t taille = 123;
+   uint32_t taille = acq();
    if (taille > TAILLE) {
       printf("La taille est trop grande, test annulé.\n");
       exit(0);

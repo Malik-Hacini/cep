@@ -15,11 +15,11 @@ struct noeud_t {
 
 // fonction implantée dans le fichier assembleur
 // renvoie vrai ssi la valeur est présente dans l'arbre
-extern bool abr_est_present(uint32_t, struct noeud_t *);
+bool abr_est_present(uint32_t, struct noeud_t *);
 
 // cree un noeud en allouant l'espace mémoire et en
 //   initialisant les champs de la structure
-static struct noeud_t *cree_noeud(uint32_t val, struct noeud_t *fg, struct noeud_t *fd)
+struct noeud_t *cree_noeud(uint32_t val, struct noeud_t *fg, struct noeud_t *fd)
 {
    struct noeud_t *res = malloc(sizeof(struct noeud_t));
    res->val = val;
@@ -29,7 +29,7 @@ static struct noeud_t *cree_noeud(uint32_t val, struct noeud_t *fg, struct noeud
 }
 
 // cree l'ABR donne dans l'enonce
-static struct noeud_t *abr_enonce(void)
+struct noeud_t *abr_enonce(void)
 {
    return cree_noeud(8,
                      cree_noeud(3,
@@ -41,7 +41,7 @@ static struct noeud_t *abr_enonce(void)
 }
 
 // teste la presence de valeurs dans l'arbre
-static void test_presence(struct noeud_t *abr)
+void test_presence(struct noeud_t *abr)
 {
    for (uint32_t i = 0; i < 15; i++) {
       printf("abr_est_present(%" PRIu32 ", abr) ? : %s\n", i, abr_est_present(i, abr) ? "oui" : "non");

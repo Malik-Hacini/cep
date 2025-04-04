@@ -1,11 +1,38 @@
-BADGES_TARGET = niv1__abr_est_present niv3__abr_est_present_tail_call niv2__abr_vers_tab niv3__tri_nain niv3__tri_nain_opt niv3__tri_nain_superopt
-BINS = comparer_nains
+BINS = abr_est_present abr_est_present_tail_call abr_vers_tab tri_nain tri_nain_opt
+BINS += tri_nain_superopt comparer_nains
+
+RVDIR ?= /matieres/3MMCEP/riscv
+AS = $(RVDIR)/bin/riscv32-unknown-elf-gcc
+ASFLAGS = -g -c
+CC = $(AS)
+CFLAGS = -nostdinc -Wall -Wextra -g -std=c99 -mabi=ilp32 -mcmodel=medany -ffunction-sections -fdata-sections -g
+CFLAGS += -I$(RVDIR)/include
+LD = $(AS)
+LDFLAGS = -L$(RVDIR)/lib -L$(RVDIR)/lib/cep_riscv_no_it
+LDFLAGS += -T cep.ld -nostartfiles -nostdlib -static -Wl,--nmagic -Wl,--gc-sections
+
+.PHONY: all
+all: $(BINS)
 
 
-COMMON := ../common
-include $(COMMON)/rules.mk
+%.o: %.S
+	$(AS) $(ASFLAGS) -o $@ $<
+
+%.o: %.s
+	$(AS) $(ASFLAGS) -o $@ $<
+
+%.stxetd: fct_%.s
+	fonction=$$(basename $@ .stxetd);awk -f test/syntaxe_etd.awk -v fonction=$$fonction $< > $@;cat $@
+
+STXETDOUTS = $(foreach f, $(BINS),  $(addsuffix .stxetd, $f))
+SORTIES = $(foreach f, $(BINS), $(addsuffix .sortie, $f))
+OBJS = $(foreach f, $(BINS), $(addsuffix .o, $f)) \
+	$(foreach f, $(BINS), $(addprefix fct_, $(addsuffix .o, $f)))
+
+.PHONY: clean
+clean:
+	$(RM) $(BINS) $(OBJS) $(TMPOBJS) $(STXETDOUTS) $(SORTIES)
 CFLAGS += -O3
-
 
 abr_est_present: abr_est_present.o fct_abr_est_present.o
 

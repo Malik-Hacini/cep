@@ -15,11 +15,11 @@ struct noeud_t {
 
 // fonction implantée dans le fichier assembleur
 // copie les valeurs des noeuds de l'arbre dans un tableau
-extern void abr_vers_tab(struct noeud_t *);
+void abr_vers_tab(struct noeud_t *);
 
 // cree un noeud en allouant l'espace mémoire et en
 //   initialisant les champs de la structure
-static struct noeud_t *cree_noeud(uint32_t val, struct noeud_t *fg, struct noeud_t *fd)
+struct noeud_t *cree_noeud(uint32_t val, struct noeud_t *fg, struct noeud_t *fd)
 {
    struct noeud_t *res = malloc(sizeof(struct noeud_t));
    res->val = val;
@@ -29,7 +29,7 @@ static struct noeud_t *cree_noeud(uint32_t val, struct noeud_t *fg, struct noeud
 }
 
 // cree l'ABR donne dans l'enonce
-static struct noeud_t *abr_enonce(void)
+struct noeud_t *abr_enonce(void)
 {
    return cree_noeud(8,
                      cree_noeud(3,
@@ -41,7 +41,7 @@ static struct noeud_t *abr_enonce(void)
 }
 
 // une fonction d'affichage du tableau
-static void affiche_tab(uint32_t tab[])
+void affiche_tab(uint32_t tab[])
 {
    printf("Contenu du tableau : ");
    for (uint8_t i = 0; i < NBR_ELEM; i++) {
