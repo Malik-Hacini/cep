@@ -20,7 +20,7 @@ fonction :
      fact_papl  : non feuille
 contexte :
      n      : registre a0; pile *(sp+4)
-     tmp      : registre t0/t1
+     tmp      : registre t0
      ra               : pile *(sp+0)
  */
 fact_papl:

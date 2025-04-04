@@ -20,7 +20,7 @@ fonction :
      abr_est_present  : non feuille
 contexte :
      val      : registre a0; pile *(sp+4)
-     abr      : registre a1 pile *(sp+8)
+     abr      : registre a1; pile *(sp+8)
      ra       : pile *(sp+0)
  */
 abr_est_present:
