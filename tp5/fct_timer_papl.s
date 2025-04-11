@@ -1,12 +1,12 @@
 #include "cep_platform.h"
-.text
-.globl reveil
+    .text
+    .globl reveil
 /* void reveil(uint32_t delta_t); */
 reveil:
 /* A reprendre depuis fct_timer.s */
     ret
 
-.globl gestion_interruptions
+    .globl gestion_interruptions
 gestion_interruptions:
     addi sp, sp, -4 # Juste ra à sauver
     sw   ra, 0(sp)

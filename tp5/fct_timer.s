@@ -1,36 +1,12 @@
 #include "cep_platform.h"
-.text
-.globl reveil
+    .text
+    .globl reveil
 /* void reveil(uint32_t delta_t); */
 reveil:
-reveil:
-    la t0, CLINT_TIMER 
-    lw t1, 0(t0) 
-    lw t2, 4(t0)
-    add t3, t1, a0
-    slt t0, t3, t1
-    bnez t0, deplacement
-    la t0, CLINT_TIMER_CMP 
-    sw t3, 0(t0) 
-    j end
-
-depacement:
-    addi t4, t2, 1
-    slt t0, t4, t2
-    bnez t0, moove
-    la t0, CLINT_TIMER_CMP
-    sw t3, 0(t0)
-    sw t4, 4(t0)
-    j fin
-
-moove:
-    la t0, CLINT_TIMER_CMP 
-    sw t3, 0(t0)
-    sw zero, 4(t0)
-    end:
+/* A completer */
     ret
 
-.globl gestion_interruptions
+    .globl gestion_interruptions
 gestion_interruptions:
     addi sp, sp, -4 # Juste ra à sauver
     sw   ra, 0(sp)
@@ -51,7 +27,7 @@ retour:
   Fonction :
     timer : feuille
   Contexte :
- */
+FIN DU CONTEXTE */
 timer:
 timer_fin_prologue:
 timer_debut_epilogue:

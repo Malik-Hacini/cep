@@ -6,15 +6,16 @@ void mon_vecteur(void)
     - Sauvegarde en pile des registres utilisés dans le traitant
     - lecture des boutons poussoirs pour faire baisser l'interruption externe
     - lecture du registre claim acquitter l'interruption au niveau du contrôleur
-    - blink = ~blink
+    - blink = ~blink  # à remplacer par ce que demande l'énoncé !
     - ecriture de blink sur les LED (adresse 0x30000000)
     - Restauration des registres sauvegardés
     - Retour de traitant (instruction mret)
 }
 */
 
-.text
-.globl mon_vecteur
+    .text
+    .globl mon_vecteur
+    .align 2
 
 mon_vecteur:
     /* sauvegarde en pile des registres utilisés dans le traitant */
@@ -28,26 +29,7 @@ mon_vecteur:
     /* blink = ~blink; */
     la   t1, blink
     lbu  t0, (t1)
-
-debut_code_perso:        
-    srli t1, t2, 19
-    bnez t1, fin_action
-    srli t1, t2, 18
-    bnez t1, fin_action 
-    srli t1, t2, 17
-    bnez t1, decrementer
-    srli t1, t2, 16
-    bnez t1, incrementer
-decrementer:
-    addi t0, t0, -1
-    j fin_action
-incrementer:
-    addi t0, t0, 1
-    
-    /* blink = ~blink; */
-
-fin_action:
-    la t1, blink
+    xori t0, t0, 0xF
     sb   t0, (t1)
 
     /* écriture de blink sur les LED
@@ -73,7 +55,7 @@ retour_traitant_interruption:
     mret
 
 /* fonction d'attente fournie permettant de lever certaines erreurs */
-.globl attente_infinie
+    .globl attente_infinie
 attente_infinie:
     mv   t0, zero
     mv   t1, zero
@@ -87,6 +69,6 @@ boucle:
     addi t2,t2,1
     j    boucle
 
-.data
+    .data
 /* uint8_t blink; */
 blink:  .byte 0
