@@ -5,7 +5,7 @@ void mon_vecteur(void)
 {
     - Sauvegarde en pile des registres utilisés dans le traitant
     - lecture des boutons poussoirs pour faire baisser l'interruption externe
-    - lecture du registre claim pour acquitter l'interruption au niveau du contrôleur
+    - lecture du registre claim acquitter l'interruption au niveau du contrôleur
     - blink = ~blink
     - ecriture de blink sur les LED (adresse 0x30000000)
     - Restauration des registres sauvegardés
@@ -13,9 +13,8 @@ void mon_vecteur(void)
 }
 */
 
-    .text
-    .globl mon_vecteur
-    .align 2
+.text
+.globl mon_vecteur
 mon_vecteur:
     /* sauvegarde en pile des registres utilisés dans le traitant */
     addi sp, sp, -12
@@ -28,7 +27,7 @@ mon_vecteur:
     /* blink = ~blink; */
     la   t1, blink
     lbu  t0, (t1)
-    xori t0, t0, 0xF
+    addi t0, t0, 1
     sb   t0, (t1)
 
     /* écriture de blink sur les LED
@@ -36,10 +35,9 @@ mon_vecteur:
        Les deux premières instructions qui suivent sont une version optimisée de
             li   t1, REG_LEDS_ADDR
             sb   t0, 0(t1)
-       En effet, %hi( ) et %lo( ) sont des macros qui sélectionnent des parties
+       En effet, (%hi( ) et %lo( ) sont des macros qui sélectionnent des parties
        de la constante REG_LEDS_ADDR. On peut donc faire l'écriture en 2
-       instructions plutôt que 3 (rappel : li est une pseudo-instruction qui
-       s'expanse en deux instructions).
+       instructions plutôt que 3.
        C'est ainsi qu'est traduite la pseudo-instruction
             sb   t0, REG_LEDS_ADDR, t1
     */
@@ -70,18 +68,18 @@ boucle:
     j    boucle
 
 
-/* Idiot mais nécessaire pour que l'évaluation automatique soit contente... */
+/* Idiot mais nécessaire pour que l'évaluation soit contente... */
 /* DEBUT DU CONTEXTE
   Fonction :
     it : feuille
   Contexte :
-FIN DU CONTEXTE */
+ */
 it:
 it_fin_prologue:
 it_debut_epilogue:
     ret
 
 
-    .data
+.data
 /* uint8_t blink; */
 blink:  .byte 0
