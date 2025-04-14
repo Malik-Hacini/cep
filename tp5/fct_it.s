@@ -28,7 +28,7 @@ mon_vecteur:
     /* blink = ~blink; */
     la   t1, blink
     lbu  t0, (t1)
-    xori t0, t0, 0xF
+    addi t0, t0, 1         // <-- Incrémente blink de 1
     sb   t0, (t1)
 
     /* écriture de blink sur les LED
@@ -78,9 +78,12 @@ boucle:
 FIN DU CONTEXTE */
 it:
 it_fin_prologue:
+    la t0, blink
+    lb t1, 0(t0)
+    addi t1, t1, 1
+    sb t1, 0(t0)
 it_debut_epilogue:
     ret
-
 
     .data
 /* uint8_t blink; */
