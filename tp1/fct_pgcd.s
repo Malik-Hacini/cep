@@ -12,7 +12,7 @@ uint32_t pgcd(void)
         }
     }
     return i;
-}
+ Test}
 */
     .text
     .globl pgcd
